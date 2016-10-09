@@ -136,7 +136,7 @@ lpritc@Totoro:planets$ ls -a
 
 
 * **Check all is well**
-  * Get a report on respository status
+  * Get a report on repository status
   * We have not added or committed any files, so we get this statement
   * Describe `master` branch - default
   
