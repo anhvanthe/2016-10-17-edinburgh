@@ -10,6 +10,37 @@ Speaker Notes for the 2016-10-17 Software Carpentry git lesson
 
 **SLIDE** (Version control with `git`)
 
+* Build good software engineering **habits** (needs repetition and practice)
+* **Transferable skill**: what's good for software also good for other documents
+
+**SLIDE** (Etherpad)
+
+* Share code snippets
+* Ask/answer questions
+* Communal note-taking
+
+**SLIDE** (Let me tell you a story)
+
+**SLIDE** (Once upon a time)
+
+* Talk around slide
+
+**SLIDE** (Advantage of version control)
+
+* Talk around slide
+* credit and blame?
+
+**SLIDE** (Version control with `git`)
+
+**SLIDE** (What lies ahead)
+
+* Talk around slide
+* Who has used `git`
+* Who has heard about `git` but not used it?
+* Who's heard horror stories about `git`?
+* `git` actually elegant and powerful - some truth in jokes, though
+* SWC focus more on *version control*, just that `git` is the tool we're using
+
 **SLIDE** (Learning objectives)
 
 * Talk around slide
@@ -22,11 +53,14 @@ Speaker Notes for the 2016-10-17 Software Carpentry git lesson
 
 * **Ask the audience**
   * Who has been in that situation?
+  * Fundamental problems:
+    * synchronising changes
+    * tracking change times
   * How do you get round it?
   * MS Office: track changes
   * Office 365: simultaneous edits?
   * DropBox: now locks files in use
-  * Google Docs: simultaneous editing
+  * Google Docs: simultaneous editing - but for code?
   
 * **Version control systems are a solution to this**
   * Excellent for code
@@ -41,18 +75,29 @@ Speaker Notes for the 2016-10-17 Software Carpentry git lesson
 **SLIDE** (How version control works)
 
 * Talk around slide
+* **for mathematicians!**
+  * can treat original document as a value (d)
+  * changes are then functions, acting on that value, e.g. f(d)
+  * functions can be compounded: g(f(d))
+* **draw on whiteboard?**
 
 **SLIDE** (Multiple editors - branching)
 
 * Talk around slide
+* **for mathematicians**
+  * f(d) != g(d) 
 
 **SLIDE** (Combining changes - merging)
 
 * Talk around slide
+* **for mathematicians**
+  * h(f(d), g(d))
 
 **SLIDE** (What version control systems do)
 
 * Talk around slide
+* *commits* are not exactly *changes* - more like checkpoints
+
 
 ## Setting up `git`
 
@@ -67,7 +112,8 @@ Speaker Notes for the 2016-10-17 Software Carpentry git lesson
 * Talk around slide
 
 * **`git` command structure**
-  * `git <command> <options>` - i.e. `git` **verb**
+  * `git <command> <options>`
+  *  i.e. `git` **verb** *options*
   * The name and email address will be associated with all our actions in `git`
   * It's helpful to have some colour to interpret `git` output
   * The `--global` flag means that every project on the computer will see these settings
@@ -480,11 +526,26 @@ Date:   Fri Jan 8 16:05:57 2016 +0000
     Start notes on Mars as a base
 ```
 
+* To show files in a commit: `git show --pretty="" --name-only`
+
+**SLIDE** (The Modify-Add-Commit lifecycle)
+
+* Talk around slide
+
+**SLIDE** (In which I predict the future)
+
+* Talk around slide
+* Can be difficult to think of commit messages
+* Good practice: short messages < 50 chars, imperative
+* Good practice: detail in longer paragraph(s) as secondary message
+
 ## Exploring history
 
 **SLIDE** (Exploring history)
 
-**SLIDE** (What use is history?)
+**SLIDE** (Is history bunk?)
+
+* Talk around slide
 
 **SLIDE** (Learning objectives)
 
@@ -528,6 +589,7 @@ index 96b2def..dfd5875 100644
 * Talk around slide
 
 * **Get IDs with `git log`**
+  * `git log --pretty=oneline`
   * Use a long ID in same way as above
   * We don't want to have to type out 40char IDs all the time
   * Use two short IDs (different lengths)
@@ -614,6 +676,8 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 * **Restore the last commit**
   * Use `git checkout HEAD`
+  * No file named: `git` warns you
+  * Name the file, `git` thinks you mean it!
   
 ```
 lpritc@Totoro:planets$ git checkout HEAD mars.txt 
@@ -632,7 +696,7 @@ A bit dusty. Bring a Hoover.
 
 Solution: 2 & 4
 
-1. will overwrite all changes with the last commit
+1. will not overwrite (will warn)
 2. solution
 3. will overwrite `data-cruncher.py` with the change before last
 4. solution
@@ -644,6 +708,7 @@ Solution: 2 & 4
 **SLIDE** (Learning objectives)
 
 * Talk around slide
+* **Ask the audience** - which files would you ignore?
 
 **SLIDE** (Not all files are useful)
 
@@ -663,6 +728,7 @@ a.out  b.out
 
   * These files are no use to us
   * `git` says they're not being tracked
+  * `git` doesn't tell us about contents of untracked directories
 
 ```
 lpritc@Totoro:planets$ git status
@@ -807,6 +873,8 @@ To https://github.com/widdowquinn/planets.git
  * [new branch]      master -> master
 ```
 
+* Show changes on GitHub site
+
 **SLIDE** (Remote GitHub repo after first push)
 
 * Talk around slide
@@ -833,6 +901,8 @@ Already up-to-date.
 **SLIDE** (Learning objectives)
 
 * Talk around slide
+* It's fine to use GitHub/other remote hosts as a personal store (even a private store)
+* At some point you may want/need to collaborate - and this is requires a few more skills
 
 **SLIDE** (Starting a collaboration)
 
@@ -845,17 +915,18 @@ Already up-to-date.
   * Check the remote repo location with `git remote -v`
   
 ```
-lpritc@Totoro:planets$ cd /tmp/
-lpritc@Totoro:tmp$ git clone https://github.com/widdowquinn/planets.git
+bash-3.2$ cd ../..
+bash-3.2$ mkdir lesson_collaborator
+bash-3.2$ cd lesson_collaborator
+bash-3.2$ git clone https://github.com/widdowquinn/planets.git
 Cloning into 'planets'...
 remote: Counting objects: 16, done.
-remote: Compressing objects: 100% (10/10), done.
-remote: Total 16 (delta 2), reused 16 (delta 2), pack-reused 0
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 16 (delta 3), reused 16 (delta 3), pack-reused 0
 Unpacking objects: 100% (16/16), done.
 Checking connectivity... done
-lpritc@Totoro:tmp$ ls planets/
-earth.txt  mars.txt
-lpritc@Totoro:planets$ git remote -v
+bash-3.2$ cd planets
+bash-3.2$ git remote -v
 origin	https://github.com/widdowquinn/planets.git (fetch)
 origin	https://github.com/widdowquinn/planets.git (push)
 ```
@@ -867,20 +938,42 @@ origin	https://github.com/widdowquinn/planets.git (push)
 * **Make a new file**
 
 ```
-lpritc@Totoro:tmp$ cd planets
-lpritc@Totoro:planets$ nano pluto.txt
-lpritc@Totoro:planets$ cat pluto.txt 
-Never a planet. Lovely, but not a planet.
+bash-3.2$ cd planets
+bash-3.2$ nano pluto.txt
+bash-3.2$ git status
+# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	pluto.txt
+nothing added to commit but untracked files present (use "git add" to track)
+bash-3.2$ git diff
+bash-3.2$ cat pluto.txt
+Not really a planet. Lovely, and all, but not a planet.
 ```
 
 * **Commit the file**
 
 ```
-lpritc@Totoro:planets$ git add pluto.txt
-lpritc@Totoro:planets$ git commit -m "Notes on Pluto"
-[master 4907645] Notes on Pluto
+bash-3.2$ git add pluto.txt
+bash-3.2$ git commit -m "add notes on Pluto"
+[master a416b49] add notes on Pluto
  1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt
+bash-3.2$ git push origin master
+Username for 'https://github.com': widdowquinn
+Password for 'https://widdowquinn@github.com': 
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 331 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local objects.
+To https://github.com/widdowquinn/planets.git
+   b9cf6a3..a416b49  master -> master
+bash-3.2$ git status
+# On branch master
+nothing to commit, working directory clean
 ```
 
 * **Push the change to GitHub**
@@ -898,6 +991,8 @@ To https://github.com/widdowquinn/planets.git
    f0232b1..4907645  master -> master
 ```
 
+* Check the change on your collaborator's repo.
+
 **SLIDE** (Pull a collaborator's changes)
 
 * Talk around slide
@@ -910,23 +1005,28 @@ To https://github.com/widdowquinn/planets.git
   * Check it's the right one with `git remote -v`
   
 ```
-lpritc@Totoro:planets$ cd ~/planets/
-lpritc@Totoro:planets$ git remote -v
+bash-3.2$ cd ../../lesson_owner/planets/
+bash-3.2$ git remote -v
 origin	https://github.com/widdowquinn/planets.git (fetch)
 origin	https://github.com/widdowquinn/planets.git (push)
-lpritc@Totoro:planets$ git status
+bash-3.2$ git status
 # On branch master
-nothing to commit, working directory clean
+nothing to commit, working directory cleanclean
 ```
 
   * `git status` does not show remote changes
   * Sync with `git pull`
 
 ```
-lpritc@Totoro:planets$ git pull origin master
+bash-3.2$ git pull origin master
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
 From https://github.com/widdowquinn/planets
  * branch            master     -> FETCH_HEAD
-Updating f0232b1..4907645
+   b9cf6a3..a416b49  master     -> origin/master
+Updating b9cf6a3..a416b49
 Fast-forward
  pluto.txt | 1 +
  1 file changed, 1 insertion(+)
@@ -946,13 +1046,14 @@ Fast-forward
 
 * Talk around slide
 
-* **`git` encourages ways of working**
+* **`git` encourages particular ways of working**
   * modular structure - small files (reusability)
   * small, incremental changes (reproducibility)
+  * commits should pass all tests!
   * good planning
   * interaction/communication
 
-### Creating a conflict
+**SLIDE** (Seriously, `git push` when done)
   
 **SLIDE** (Let's make a conflict)
 
@@ -964,24 +1065,39 @@ Fast-forward
   * Commit and push
 
 ```
-lpritc@Totoro:planets$ git remote -v
+bash-3.2$ git remote -v
 origin	https://github.com/widdowquinn/planets.git (fetch)
 origin	https://github.com/widdowquinn/planets.git (push)
-lpritc@Totoro:planets$ nano mars.txt
-lpritc@Totoro:planets$ git add mars.txt 
-lpritc@Totoro:planets$ git commit -m "Slandering Pluto"
-[master d83cb5a] Slandering Pluto
+bash-3.2$ git status
+# On branch master
+nothing to commit, working directory clean
+bash-3.2$ pwd
+/Users/lpritc/lesson_owner/planets
+bash-3.2$ git remote -v
+origin	https://github.com/widdowquinn/planets.git (fetch)
+origin	https://github.com/widdowquinn/planets.git (push)
+bash-3.2$ nano mars.txt
+bash-3.2$ cat mars.txt
+Cold and dry. Everything a nice colour. Evidence of Matt Damon.
+Two moons! This might be a problem for werewolves.
+Not much atmosphere, mind. Windy.
+Dusty. Bring a Hoover. Or a Dyson.
+Definitely a planet. Not like that space rock, Pluto!
+bash-3.2$ git add mars.txt
+bash-3.2$ git commit -m "add slander against Pluto"
+[master 9d2082c] add slander against Pluto
  1 file changed, 1 insertion(+)
-lpritc@Totoro:planets$ git push origin master
+bash-3.2$ git push origin master
 Username for 'https://github.com': widdowquinn
 Password for 'https://widdowquinn@github.com': 
 Counting objects: 5, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 341 bytes | 0 bytes/s, done.
+Writing objects: 100% (3/3), 358 bytes | 0 bytes/s, done.
 Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
 To https://github.com/widdowquinn/planets.git
-   4907645..d83cb5a  master -> master
+   a416b49..9d2082c  master -> master
 ```
 
 * **Create the collaborator conflict**
@@ -991,14 +1107,20 @@ To https://github.com/widdowquinn/planets.git
   * Commit the change
   
 ```
-lpritc@Totoro:planets$ git remote -v
+bash-3.2$ cd ../../lesson_collaborator/planets/
+bash-3.2$ git remote -v
 origin	https://github.com/widdowquinn/planets.git (fetch)
 origin	https://github.com/widdowquinn/planets.git (push)
-lpritc@Totoro:planets$ cd /tmp/planets/
-lpritc@Totoro:planets$ nano mars.txt
-lpritc@Totoro:planets$ git add mars.txt 
-lpritc@Totoro:planets$ git commit -m "Praising Pluto"
-[master 60f892f] Praising Pluto
+bash-3.2$ nano mars.txt
+bash-3.2$ cat mars.txt 
+Cold and dry. Everything a nice colour. Evidence of Matt Damon.
+Two moons! This might be a problem for werewolves.
+Not much atmosphere, mind. Windy.
+Dusty. Bring a Hoover. Or a Dyson.
+This is nearly as nice a planet as Pluto. Which is DEFINITELY A PLANET!!!
+bash-3.2$ git add mars.txt 
+bash-3.2$ git commit -m "adds praise for Pluto"
+[master 955bfca] adds praise for Pluto
  1 file changed, 1 insertion(+)
 ```
 
@@ -1006,7 +1128,7 @@ lpritc@Totoro:planets$ git commit -m "Praising Pluto"
   * As the collaborator, this should raise a conflict!
 
 ```
-lpritc@Totoro:planets$ git push origin master
+bash-3.2$ git push origin master
 Username for 'https://github.com': widdowquinn
 Password for 'https://widdowquinn@github.com': 
 To https://github.com/widdowquinn/planets.git
@@ -1022,10 +1144,13 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 **SLIDE** (The conflict message)
 
 * Talk around the slide
+* local conflicts with remote, so you cannot push!
+* advice from `git`: integrate remote with `git pull` before `push`ing again.
 
 **SLIDE** (The conflicting changes)
 
 * Talk around the slide
+* **COMMUNICATION BETWEEN DEVELOPERS**
 
 ## Resolving a conflict
 
@@ -1036,16 +1161,17 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 * **Pull the remote changes**
   * `git` tries to merge automatically, and will if it can
   * If not, it marks the conflict in the affected file
+  * `git` tells us about the problem
 
 ```
-lpritc@Totoro:planets$ git pull origin master
+bash-3.2$ git pull origin master
 remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (1/1), done.
 remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
 Unpacking objects: 100% (3/3), done.
 From https://github.com/widdowquinn/planets
  * branch            master     -> FETCH_HEAD
-   4907645..d83cb5a  master     -> origin/master
+   a416b49..9d2082c  master     -> origin/master
 Auto-merging mars.txt
 CONFLICT (content): Merge conflict in mars.txt
 Automatic merge failed; fix conflicts and then commit the result.
@@ -1058,30 +1184,30 @@ Automatic merge failed; fix conflicts and then commit the result.
   * We have to decide which change to keep (if either)
 
 ```
-lpritc@Totoro:planets$ cat mars.txt 
-Cold and dry. Everything a nice colour. Matt Damon.
-Two moons. This may be an issue for werewolves!
-Not much atmosphere, mind.
-A bit dusty. Bring a Hoover.
+bash-3.2$ cat mars.txt
+Cold and dry. Everything a nice colour. Evidence of Matt Damon.
+Two moons! This might be a problem for werewolves.
+Not much atmosphere, mind. Windy.
+Dusty. Bring a Hoover. Or a Dyson.
 <<<<<<< HEAD
-I wish Pluto was a planet, like this one.
+This is nearly as nice a planet as Pluto. Which is DEFINITELY A PLANET!!!
 =======
-But at least it's a planet, unlike Pluto.
->>>>>>> d83cb5a5ef115c4718a685121182c27a874143a8
+Definitely a planet. Not like that space rock, Pluto!
+>>>>>>> 9d2082c3d0209af6b8e51c01993350f6014610d6
 ```
 
 * **Edit the file to resolve the change**
   * Until you add/commit, `git status` will warn about "unmerged paths"
 
 ```
-lpritc@Totoro:planets$ nano mars.txt 
-lpritc@Totoro:planets$ cat mars.txt
-Cold and dry. Everything a nice colour. Matt Damon.
-Two moons. This may be an issue for werewolves!
-Not much atmosphere, mind.
-A bit dusty. Bring a Hoover.
-But at least it's a planet, unlike Pluto. Which is definitely interesting.
-lpritc@Totoro:planets$ git status
+bash-3.2$ nano mars.txt
+bash-3.2$ cat mars.txt
+Cold and dry. Everything a nice colour. Evidence of Matt Damon.
+Two moons! This might be a problem for werewolves.
+Not much atmosphere, mind. Windy.
+Dusty. Bring a Hoover. Or a Dyson.
+Definitely a planet. Not like that space rock, Pluto!
+bash-3.2$ git status
 # On branch master
 # Your branch and 'origin/master' have diverged,
 # and have 1 and 1 different commit each, respectively.
@@ -1101,25 +1227,20 @@ no changes added to commit (use "git add" and/or "git commit -a")
 * **Add and commit, then push**
 
 ```
-lpritc@Totoro:planets$ git add mars.txt
-lpritc@Totoro:planets$ git commit -m "merged changes from GitHub"
-[master 665ed3f] merged changes from GitHub
-lpritc@Totoro:planets$ git status
-# On branch master
-# Your branch is ahead of 'origin/master' by 2 commits.
-#   (use "git push" to publish your local commits)
-#
-nothing to commit, working directory clean
-lpritc@Totoro:planets$ git push origin master
+bash-3.2$ git add mars.txt
+bash-3.2$ git commit -m "merged changes from GitHub"
+[master 0581d44] merged changes from GitHub
+bash-3.2$ git push origin master
 Username for 'https://github.com': widdowquinn
 Password for 'https://widdowquinn@github.com': 
-Counting objects: 10, done.
+Counting objects: 8, done.
 Delta compression using up to 4 threads.
-Compressing objects: 100% (6/6), done.
-Writing objects: 100% (6/6), 671 bytes | 0 bytes/s, done.
-Total 6 (delta 4), reused 0 (delta 0)
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 571 bytes | 0 bytes/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
 To https://github.com/widdowquinn/planets.git
-   d83cb5a..665ed3f  master -> master
+   9d2082c..0581d44  master -> master
 ``` 
 
 * **Change back to your host repo, and pull**
@@ -1127,28 +1248,68 @@ To https://github.com/widdowquinn/planets.git
   * The conflict is resolved
 
 ```
-lpritc@Totoro:planets$ cd ~/planets/
-lpritc@Totoro:planets$ git remote -v
+bash-3.2$ cd ../../lesson_owner/planets
+bash-3.2$ git remote -v
 origin	https://github.com/widdowquinn/planets.git (fetch)
 origin	https://github.com/widdowquinn/planets.git (push)
-lpritc@Totoro:planets$ git pull origin master
-remote: Counting objects: 6, done.
+bash-3.2$ git pull origin master
+remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
-remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0
-Unpacking objects: 100% (6/6), done.
+remote: Total 4 (delta 2), reused 4 (delta 2), pack-reused 0
+Unpacking objects: 100% (4/4), done.
 From https://github.com/widdowquinn/planets
  * branch            master     -> FETCH_HEAD
-   d83cb5a..665ed3f  master     -> origin/master
-Updating d83cb5a..665ed3f
+   9d2082c..0581d44  master     -> origin/master
+Updating 9d2082c..0581d44
 Fast-forward
- mars.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-lpritc@Totoro:planets$ cat mars.txt 
-Cold and dry. Everything a nice colour. Matt Damon.
-Two moons. This may be an issue for werewolves!
-Not much atmosphere, mind.
-A bit dusty. Bring a Hoover.
-But at least it's a planet, unlike Pluto. Which is definitely interesting.
+bash-3.2$ git log
+commit 0581d443b61c2c433b9ab398188eac93b003c57a
+Merge: 955bfca 9d2082c
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 15:50:54 2016 +0100
+
+    merged changes from GitHub
+
+commit 955bfca6492367f72f82f44816f979b88141dba4
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 15:44:26 2016 +0100
+
+    adds praise for Pluto
+
+commit 9d2082c3d0209af6b8e51c01993350f6014610d6
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 15:42:48 2016 +0100
+
+    add slander against Pluto
+
+commit a416b49acd10498530ed6efd74bd1261af88e306
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 15:35:55 2016 +0100
+
+    add notes on Pluto
+
+commit b9cf6a312eb223b09bd4dbacf7d8513c8e394fe1
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 15:12:54 2016 +0100
+
+    add .gitignore file
+
+commit 68d0ec8ed8cdff90cd468e26c2a3615638b1a0b3
+Author: Leighton Pritchard <leighton.pritchard@hutton.ac.uk>
+Date:   Sat Oct 15 14:54:11 2016 +0100
+
+    add notes on Earth, and Mars cleaning
+
+commit 8e848b150c647b576bb9333121264f940416bf01
+bash-3.2$ git status
+# On branch master
+nothing to commit, working directory clean
+bash-3.2$ cat mars.txt
+Cold and dry. Everything a nice colour. Evidence of Matt Damon.
+Two moons! This might be a problem for werewolves.
+Not much atmosphere, mind. Windy.
+Dusty. Bring a Hoover. Or a Dyson.
+Definitely a planet. Not like that space rock, Pluto!
 ```
 
 ## Wrapping up

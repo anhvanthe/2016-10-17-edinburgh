@@ -27,7 +27,7 @@ Please use the EtherPad to take communal notes:
 ### Advantage of version control
 
 * Nothing that is committed is *ever* lost (unless you try…)
-* We know who made which changes, and when (so blame can be assigned…)
+* We can record who made which changes, and when
 * We can revert to previous versions.
 * We can identify and correct conflicts
 
@@ -39,7 +39,7 @@ The lab notebook of code development.
 
 ----
 
-### What lies ahead…
+### What lies ahead…?
 
 ![XKCD comic - A: This is git. It tracks collaborative work on projects through a beautiful distributed graph theory tree mode; B: Cool. How do we use it?; A: No idea. Just memorise these shell commands and type them to sync up. If you get errors, save your work elsewhere, delete the project, and download a gresh copy.](img/git.png)
 
@@ -54,7 +54,7 @@ The lab notebook of code development.
 
 ### Do you recognise this?
 
-(a.k.a. have you ever worked on the same document as someone else?)
+(i.e. have you *ever* worked on the same document as someone else?)
 
 ![PhD comic: "Final".doc - files are called: Final.doc, Final_rev.2.doc, FINAL_rev.6.COMMENTS.doc, FINAL_rev.8.commens5.CORRECTIONS.doc, FINAL_rev.18.comment7.corrections9.MORE.30.doc, FINAL_rev.22.comments49.corrections.10.WHYDIDICOMETOGRADSCHOOL.doc](img/phd101212s_small.gif)
 
@@ -129,6 +129,7 @@ git config --global core.editor \
 "'C:\Program Files (x86)\Notepad++\notepad++.exe' \
 -multiInst -notabbar -nosession -noPlugin"
 ```
+[http://pad.software-carpentry.org/2016-10-17-edinburgh](http://pad.software-carpentry.org/2016-10-17-edinburgh)
 
 ---
 
@@ -139,12 +140,17 @@ git config --global core.editor \
 ### Learning objectives
 
 * Create a local `git` repository
+* What is in a repository?
+  * files
+  * commits
+  * metadata
 
 ----
 
 ### Creating a `git` repository
 
 * A fictional project about planets
+  * (Wolfman and Dracula…)
 
 **Live Presentation**
 
@@ -162,7 +168,7 @@ git status
 ### Learning objectives
 
 * Practice the modify-add-commit cycle
-* Understand where information is stored in the `git` workflow
+* Understand where information is stored, in the `git` workflow
 
 ----
 
@@ -181,8 +187,8 @@ nano mars.txt
 
 ### My first `git` commit
 
-* We tell `git` that it should *track* a file (watch for changes)
-* We also `commit` the file (keep a copy of the file in the *repository*, in its current state)
+* We tell `git` that it should *track* a file (watch for changes): `git add`
+* We also `git commit` the file (keep a copy of the file in the *repository*, in its current state)
 
 **Live Presentation**
 
@@ -227,6 +233,7 @@ git commit
 
 -  Which command(s) below would save changes in `myfile.txt` to the local `git` repository?
 
+
 1. `git commit -m "add recent changes"`
 2. `git init myfile.txt; git commit -m "add recent changes"`
 3. `git add myfile.txt; git commit -m "add recent changes"`
@@ -235,13 +242,11 @@ git commit
 
 ----
 
-### Challenge 1
-
-(5min)
+### Challenge 1 (5min)
 
 * Make a one-line change to `mars.txt`.
-* Create file called `earth.txt` containing one-line comment on Earth.
-* Commit both changes to the repository (as a single `commit`)
+* Create file `earth.txt` with one-line comment on Earth.
+* Commit both changes (*as a **single*** `commit`)
 
 ![On the left are two documents (FILE1.txt and FILE2.txt). On the right is a zone representing the `.git` directory. Arrows show the use of `git add` to place the two documents into the staging area, followed by a `git commit` to move both files simultaneously from the staging area to the repository](img/git-committing.svg)
 
@@ -263,11 +268,11 @@ git commit
 
 ----
 
-### What use is history?
+### Is history bunk?
 
 * How can I identify old versions of files?
-* How do I review changes?
-* How can I recover old versions?
+* How do I review changes between commits?
+* How can I recover old file versions?
 
 ----
 
@@ -331,9 +336,9 @@ git checkout HEAD mars.txt
 
 ### `git checkout`
 
-* `git checkout` "checks out" (restores) old file versions
+* `git checkout` "checks out" files from the repo
   * Can use any commit identifier
-  * Check out the commit *before* the change you want to remove!
+  * Check out the commit *before* the edit you want to replace!
 
 ![On the left is a zone representing the `.git` directory, with three commits in a repository. One commit (HEAD~1, f22b25e) contains changes we want to recover. On the right are two files that are rcovered. An arrow indicates two commands for recovery: `git checkout HEAD~1` and `git checkout f22b25e`](img/git-checkout.svg)
 
@@ -341,7 +346,7 @@ git checkout HEAD mars.txt
 
 ### Question
 
-- Which commands below will let Jennifer recover the last committed version of her Python script called `data_cruncher.py` (but no other files)?
+- Which command(s) below will let Jennifer recover the last committed version of her Python script called `data_cruncher.py` (but no other files)?
 
 
 1. `$ git checkout HEAD`
@@ -531,7 +536,7 @@ git push origin master
 
 * Change back to your **own** repository
   * Check with `git remote -v`
-* Pull the changes made by your collaborator
+* `git pull` the changes made by your collaborator
 
 **Live Presentation**
 
